@@ -54,3 +54,17 @@ class CookDetailView(generic.DetailView):
     model = Cook
     queryset = Cook.objects.all().prefetch_related("dishes__dish_type")
 
+
+class CookCreateView(generic.CreateView):
+    model = Cook
+    fields = "__all__"
+
+
+class CookUpdateView(generic.UpdateView):
+    model = Cook
+    fields = "__all__"
+
+
+class CookDeleteView(generic.DeleteView):
+    model = Cook
+    success_url = reverse_lazy("kitchen:dish-type-list")
