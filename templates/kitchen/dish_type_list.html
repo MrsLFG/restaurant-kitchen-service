@@ -12,13 +12,14 @@
     </a>
   </h1>
   {% if dish_type_list %}
-    <table>
+    <table class="table">
       <tr>
         <th>ID</th>
         <th>Name</th>
         <th>Update</th>
         <th>Delete</th>
       </tr>
+
       {% for dish_type in dish_type_list %}
         <tr>
           <td>
@@ -32,7 +33,12 @@
                 Update
               </a>
           </td>
-          <td></td>
+          <td>
+            <a style="color: red"
+                href="{% url 'kitchen:dish-type-delete' pk=dish_type.id %}">
+                Delete
+              </a>
+          </td>
         </tr>
       {% endfor %}
     </table>
