@@ -5,7 +5,12 @@
 {% endblock %}
 
 {% block content %}
-  <h1>Dish Type List</h1>
+  <h1>
+    Dish Type List
+    <a href="{% url 'kitchen:dish-type-create' %}" class="btn btn-primary link-to-page">
+      Create
+    </a>
+  </h1>
   {% if dish_type_list %}
     <table>
       <tr>
@@ -22,7 +27,11 @@
           <td>
             {{ dish_type.name }}
           </td>
-          <td></td>
+          <td>
+            <a href="{% url 'kitchen:dish-type-update' pk=dish_type.id %}">
+                Update
+              </a>
+          </td>
           <td></td>
         </tr>
       {% endfor %}
