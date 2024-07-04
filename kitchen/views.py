@@ -22,6 +22,7 @@ class DishTypeListView(generic.ListView):
     model = DishType
     template_name = "kitchen/dish_type_list.html"
     context_object_name = "dish_type_list"
+    paginate_by = 3
 
 
 class DishTypeCreateView(generic.CreateView):
@@ -43,4 +44,13 @@ class DishTypeDeleteView(generic.DeleteView):
     success_url = reverse_lazy("kitchen:dish-type-list")
     template_name = "kitchen/dish_type_confirm_delete.html"
 
+
+class CookListView(generic.ListView):
+    model = Cook
+    paginate_by = 3
+
+
+class CookDetailView(generic.DetailView):
+    model = Cook
+    queryset = Cook.objects.all().prefetch_related("dishes__dish_type")
 
