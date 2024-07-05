@@ -101,3 +101,20 @@ class DishListViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, self.dish.dish_type.name)
         self.assertContains(response, self.dish.name)
+
+    def test_dish_list_view_pagination(self):
+        dish_type = DishType.objects.create(name="Test")
+        dishes = [
+            Dish.objects.create(
+                name=f"name{i}",
+                price=10.00,
+                dish_type=dish_type
+            )
+            for i in range(3)
+        ]
+        for dish in dishes:
+            dish.cooks.add(self.user)
+        response = self.client.get(reverse("kitchen:dish-list"))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.context["dish_list"]), 3)
+        self.assertTrue(response.context["is_paginated"])
