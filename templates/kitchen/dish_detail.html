@@ -14,6 +14,13 @@
     </h4>
   <p><strong>Price: </strong>{{ dish.price }}</p>
   <p><strong>Description: </strong>{{ dish.description }}</p>
+  <p style="color: red">If you want to delete this dish
+    <a
+        href="{% url 'kitchen:dish-delete' pk=dish.id %}"
+        class="btn btn-danger"
+    >CLick
+    </a>
+  </p>
   <div class="ml-3">
     <h3>A list of cooks to prepare the dish: </h3>
     {% for cook in dish.cooks.all %}
@@ -24,15 +31,20 @@
         ({{ cook.years_of_experience }} years of experience)
       {% endif %}
       </p>
-      <p>If you want to delete this dish
-        <a
-            href="{% url 'kitchen:dish-delete' pk=dish.id %}"
-            class="btn btn-danger"
-        >CLick
-        </a>
-      </p>
     {% empty %}
       <p>No cooks!</p>
     {% endfor %}
   </div>
+  {% if request.user in dish.cooks.all %}
+    <form action="{% url 'kitchen:dish-assign' pk=dish.id %}" method="post">
+    {% csrf_token %}
+      <input type="submit" class="btn btn-danger link-to-page" value="Delete me from this dish">
+    </form>
+    {% else %}
+    <form action="{% url 'kitchen:dish-assign' pk=dish.id %}" method="post">
+    {% csrf_token %}
+      <input type="submit" class="btn btn-success link-to-page" value="Assign me to this dish">
+    </form>
+  {% endif %}
+
 {% endblock %}
