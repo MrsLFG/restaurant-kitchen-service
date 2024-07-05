@@ -11,6 +11,7 @@ from kitchen.forms import (
     DishForm,
     DishTypeNameSearchForm,
     CookUsernameSearchForm,
+    DishNameSearchForm,
 )
 from kitchen.models import Cook, Dish, DishType
 
@@ -116,10 +117,26 @@ class DishListView(LoginRequiredMixin, generic.ListView):
     model = Dish
     paginate_by = 3
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(DishListView, self).get_context_data(**kwargs)
+        name = self.request.GET.get("name")
+        context["search_form"] = DishNameSearchForm(
+            initial={"name": name}
+        )
+        return context
+
+    def get_queryset(self):
+        queryset = Dish.objects.all().select_related("dish_type")
+        form = DishNameSearchForm(self.request.GET)
+        if form.is_valid():
+            return queryset.filter(
+                name__icontains=form.cleaned_data["name"]
+            )
+        return queryset
+
 
 class DishDetailView(LoginRequiredMixin, generic.DetailView):
     model = Dish
-    queryset = Dish.objects.all().select_related("dish_type")
 
 
 class DishCreateView(LoginRequiredMixin, generic.CreateView):
