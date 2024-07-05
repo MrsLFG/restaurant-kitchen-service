@@ -75,4 +75,3 @@ class SignUpForm(UserCreationForm):
             "password2",
             "years_of_experience",
         )
-
