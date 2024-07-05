@@ -1,7 +1,8 @@
+from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import generic
 
@@ -12,6 +13,7 @@ from kitchen.forms import (
     DishTypeNameSearchForm,
     CookUsernameSearchForm,
     DishNameSearchForm,
+    SignUpForm,
 )
 from kitchen.models import Cook, Dish, DishType
 
@@ -165,3 +167,15 @@ class AssignUserToDishView(LoginRequiredMixin, generic.View):
         return HttpResponseRedirect(
             reverse_lazy("kitchen:dish-detail", kwargs={"pk": pk})
     )
+
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect("kitchen:index")
+    else:
+        form = SignUpForm()
+    return render(request, "registration/signup.html", {"form": form})

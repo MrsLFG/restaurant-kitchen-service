@@ -61,3 +61,18 @@ class DishNameSearchForm(forms.Form):
             attrs={"placeholder": "Search by name"}
         )
     )
+
+
+class SignUpForm(UserCreationForm):
+    class Meta:
+        model = Cook
+        fields = (
+            "username",
+            "first_name",
+            "last_name",
+            "email",
+            "password1",
+            "password2",
+            "years_of_experience",
+        )
+
