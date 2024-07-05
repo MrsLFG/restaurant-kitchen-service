@@ -17,6 +17,7 @@ from kitchen.views import (
     DishUpdateView,
     DishDeleteView,
     AssignUserToDishView,
+    signup,
 )
 
 
@@ -57,5 +58,5 @@ urlpatterns = [
     path(
         "dishes/<int:pk>/toggle-assign/",
         AssignUserToDishView.as_view(),
-        name="dish-assign")
+        name="dish-assign"),
 ]
