@@ -139,6 +139,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOGIN_REDIRECT_URL = "/kitchen/"
 
-LOGOUT_REDIRECT_URL = "kitchen:sign-in"
+LOGOUT_REDIRECT_URL = "login"
 
 AUTH_USER_MODEL = "kitchen.Cook"
