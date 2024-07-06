@@ -1,4 +1,5 @@
 from django.urls import path
+from django.views.generic import TemplateView
 
 from kitchen.views import (
     index,
@@ -17,7 +18,7 @@ from kitchen.views import (
     DishUpdateView,
     DishDeleteView,
     AssignUserToDishView,
-    signup,
+    CustomLoginView,
 )
 
 
@@ -59,4 +60,9 @@ urlpatterns = [
         "dishes/<int:pk>/toggle-assign/",
         AssignUserToDishView.as_view(),
         name="dish-assign"),
+    path("login/", CustomLoginView.as_view(), name='login'),
+    path(
+        "sign-in/",
+        TemplateView.as_view(template_name='kitchen/sign-in.html'),
+        name='sign-in'),
 ]

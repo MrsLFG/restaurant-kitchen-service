@@ -24,5 +24,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("kitchen/", include("kitchen.urls", namespace="kitchen")),
     path("accounts/", include("django.contrib.auth.urls")),
-    path("signup/", signup, name="signup")
+    path("signup/", signup, name="signup"),
 ]
