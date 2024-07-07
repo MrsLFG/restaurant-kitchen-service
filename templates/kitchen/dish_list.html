@@ -60,8 +60,9 @@
           <div class="col-lg-8 text-center mx-auto my-auto">
             <h1 class="text-white">Let's consider a variety of dishes</h1>
             <p class="lead mb-4 text-white opacity-8">We constantly try to express ourselves and realize the cooking of our favorite dishes</p>
-            <button type="submit" class="btn bg-white text-dark">Create Account</button>
-            <h6 class="text-white mb-2 mt-5">Find us on</h6>
+                <a href="{% url 'kitchen:dish-create' %}" class="btn bg-gradient-light w-auto me-2">
+                  Create new dish
+                </a>
             <div class="d-flex justify-content-center">
             </div>
           </div>
@@ -79,17 +80,18 @@
           <p class="text-white opacity-8 mb-0">Here you can select different dishes to see detailed information about them.</p>
         </div>
       </div>
-    <div class="container">
-      <div class="row justify-space-between py-2">
-        <div class="col-lg-4 mx-auto">
-          <div class="input-group input-group-dynamic mb-4">
-            <form action="" method="get" class="form-inline">
-              {{ search_form|crispy }}
-              <input type="submit" value="🔎" class="btn btn-outline-white">
-            </form>
+      <div class="container">
+        <div class="row justify-space-between py-2">
+          <div class="col-lg-4 ">
+            <div class="input-group input-group-dynamic">
+              <form action="" method="get" class="form-inline">
+                {{ search_form|crispy }}
+                <input type="submit" value="🔎" class="btn btn-outline-white">
+              </form>
+            </div>
           </div>
         </div>
-    </div>
+      </div>
       {% if dish_list %}
         <div class="row">
           {% for dish in dish_list %}
@@ -116,3 +118,4 @@
   </div>
 
 {% endblock content %}
+  
