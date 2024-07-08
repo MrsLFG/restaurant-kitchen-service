@@ -20,7 +20,7 @@
   <link rel="icon" type="image/png" href="{{ ASSETS_ROOT }}/img/favicon.png">
 
   <title>
-    Kitchen service  - {% block title %}{% endblock %} | AppSeed
+    Kitchen service  - {% block title %}{% endblock %}
   </title>
   
   <!--     Fonts and icons     -->
@@ -34,6 +34,8 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
   <link id="pagestyle" href="{{ ASSETS_ROOT }}/css/material-kit.css?v=3.0.0" rel="stylesheet" />
+{#  {% load static %}#}
+{#  <link rel="stylesheet" href="{% static 'css/style.css' %}">#}
 
   <!-- Specific Page CSS goes HERE  -->
   {% block stylesheets %}{% endblock stylesheets %}
