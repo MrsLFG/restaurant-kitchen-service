@@ -1,3 +1,9 @@
 body {
-    margin-top: 20px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.input-group-dynamic input[type="text"],
+.input-group-dynamic input[type="search"] {
+  color: #000; /* Чорний колір тексту */
 }
