@@ -41,7 +41,7 @@
 {% extends "layouts/base.html" %}
 {% load crispy_forms_filters %}
 
-{% block title %} About US {% endblock %}
+{% block title %} About Dish {% endblock %}
 
 {% block body_class %} about-us {% endblock %}
 
@@ -84,7 +84,7 @@
         <div class="row justify-space-between py-2">
           <div class="col-lg-4 ">
             <div class="input-group input-group-dynamic">
-              <form action="" method="get" class="form-inline">
+              <form action="" method="get" class="form-inline" >
                 {{ search_form|crispy }}
                 <input type="submit" value="🔎" class="btn btn-outline-white">
               </form>
