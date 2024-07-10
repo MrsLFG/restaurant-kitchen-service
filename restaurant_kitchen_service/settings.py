@@ -34,6 +34,7 @@ DEBUG = os.environ.get("DJANGO_DEBUG", "") != "False"
 ALLOWED_HOSTS = [
     "127.0.0.1",
     "localhost",
+    "restaurant-kitchen-service-vnjc.onrender.com"
 ]
 
 INTERNAL_IPS = [
