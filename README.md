@@ -6,6 +6,10 @@
 
 Django project about a restaurant kitchen in which the cooks manage what dishes they prepare and what types they are.
 
+## Check it out!
+
+[Restaurant Kitchen Service project deployed to Render](https://restaurant-kitchen-service-vnjc.onrender.com/)
+
 ## Installation
 
 Python3 must be already installed
