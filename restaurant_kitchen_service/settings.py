@@ -107,6 +107,11 @@ if DATABASE_URL:
     DATABASES["default"].update(db_from_env)
 
 
+CSRF_COOKIE_SECURE = True
+
+SESSION_COOKIE_SECURE = True
+
+
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
