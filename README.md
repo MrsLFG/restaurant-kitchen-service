@@ -33,3 +33,7 @@ python manage.py runserver #start Django Server
 
 ## Demo
 ![Website Interface](demo.png)
+
+## Test user
+username: test
+password: Test12345
