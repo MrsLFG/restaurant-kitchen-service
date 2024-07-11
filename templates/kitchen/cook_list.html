@@ -1,0 +1,131 @@
+{#{% extends "base.html" %}#}
+{#{% load crispy_forms_filters %}#}
+{##}
+{#{% block content %}#}
+{#  <h1>#}
+{#    Cook List#}
+{#    <a href="{% url 'kitchen:cook-create' %}" class="btn btn-primary link-to-page">#}
+{#      Create#}
+{#    </a>#}
+{#  </h1>#}
+{#  <form action="" method="get" class="form-inline">#}
+{#    {{ search_form|crispy }}#}
+{#    <input type="submit" value="🔎" class="btn btn-secondary">#}
+{#  </form>#}
+{#  {% if cook_list %}#}
+{#    <table class="table">#}
+{#      <tr>#}
+{#        <th>ID</th>#}
+{#        <th>Username</th>#}
+{#        <th>First name</th>#}
+{#        <th>Last name</th>#}
+{#        <th>Years of experience</th>#}
+{#      </tr>#}
+{##}
+{#      {% for cook in cook_list %}#}
+{#        <tr>#}
+{#          <td> {{ cook.id }}</td>#}
+{#          <td>#}
+{#            <a href="{{ cook.get_absolute_url }}">#}
+{#              {{ cook.username }} #}
+{#              {% if user == cook %} (Me)#}
+{#              {% endif %}</a>#}
+{#          </td>#}
+{#          <td>{{ cook.first_name }}</td>#}
+{#          <td>{{ cook.last_name }}</td>#}
+{#          <td>{{ cook.years_of_experience }}</td>#}
+{#        </tr>#}
+{#      {% endfor %}#}
+{#    </table>#}
+{##}
+{#   {% else %}#}
+{#      <p>There are no cook in restaurant kitchen!</p>#}
+{#  {% endif %}#}
+{#{% endblock %}#}
+
+{% extends "layouts/base.html" %}
+{% load crispy_forms_filters %}
+
+{% block title %} About Cook {% endblock %}
+
+{% block body_class %} about-us {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+  {% include 'includes/navigation-transparent.html' %}
+
+  <header class="bg-gradient-dark">
+    <div class="page-header min-vh-75" style="background-image: url('{{ ASSETS_ROOT }}/img/bg9.jpg');">
+      <span class="mask bg-gradient-dark opacity-6"></span>
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8 text-center mx-auto my-auto">
+            <h1 class="text-white">The best chefs work in our kitchen</h1>
+                <a href="{% url 'kitchen:cook-create' %}" class="btn bg-gradient-light w-auto me-2">
+                  Create new cook
+                </a>
+            <div class="d-flex justify-content-center">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="card card-body shadow-xl mx-3 mx-md-4 mt-n6">
+  <section class="pb-5 position-relative bg-gradient-dark mx-n3">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 text-start mb-5 mt-5">
+          <h3 class="text-white z-index-1 position-relative">A list of chefs who prepare various dishes</h3>
+          <p class="text-white opacity-8 mb-0">Here you can select different cooks to see detailed information about them.</p>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row justify-space-between py-2">
+          <div class="col-lg-4 ">
+            <div class="input-group input-group-dynamic">
+              <form action="" method="get" class="form-inline">
+                {{ search_form|crispy }}
+                <input type="submit" value="🔎" class="btn btn-outline-white">
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% if cook_list %}
+        <div class="row">
+          {% for cook in cook_list %}
+            <div class="col-lg-6 col-12">
+              <div class="card card-profile mt-4">
+                <div class="row">
+                  <div class="col-12 my-auto">
+                    <div class="card-body">
+                      <h5 class="mb-0">
+                        <a href="{{ cook.get_absolute_url }}">
+                          {{ cook.first_name }} {{ cook.last_name }}
+                        </a>
+                      </h5>
+                      <h6 class="text-info">
+                        {{ cook.username }}
+                        {% if user == cook %} (Me)
+                        {% endif %}
+                      </h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p>There are no cooks in restaurant kitchen!</p>
+      {% endif %}
+    </div>
+  </section>
+  </div>
+
+{% endblock content %}

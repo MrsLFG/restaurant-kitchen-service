@@ -1,0 +1,120 @@
+{#{% extends "base.html" %}#}
+{##}
+{#{% block content %}#}
+{#  <h1>#}
+{#    Username: {{ cook.username }}#}
+{#    <a href="{% url 'kitchen:cook-update' pk=cook.id %}" class="btn btn-secondary link-to-page">#}
+{#      Update#}
+{#    </a>#}
+{#    #}
+{#    <a href="{% url 'kitchen:cook-delete' pk=cook.id %}" class="btn btn-danger link-to-page">#}
+{#      Delete#}
+{#    </a>#}
+{#  </h1>#}
+{##}
+{#  <p><strong>First name:</strong> {{ cook.first_name }}</p>#}
+{#  <p><strong>Last name:</strong> {{ cook.last_name }}</p>#}
+{#  <p><strong>Years of experience:</strong> {{ cook.years_of_experience }}</p>#}
+{##}
+{##}
+{#  <hr>#}
+{#  <div class="ml-3">#}
+{#    <h5>Dishes prepared by the chef: </h5>#}
+{#    <ul>#}
+{#      {% for dish in cook.dishes.all  %}#}
+{#          <li>{{ dish.name }} ({{ dish.dish_type }})</li>#}
+{#        {% endfor %}#}
+{#    </ul>#}
+{#  </div>#}
+{#{% endblock %}#}
+
+{% extends "layouts/base.html" %}
+
+{% block title %} About Cook {% endblock %}
+
+{% block body_class %} blog-author {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+  {% include 'includes/navigation-transparent.html' %}
+
+  <header>
+    <div class="page-header min-height-400" style="background-image: url('{{ ASSETS_ROOT }}/img/city-profile.jpg');" loading="lazy">
+      <span class="mask bg-gradient-dark opacity-8"></span>
+    </div>
+  </header>
+
+  <div class="card card-body blur shadow-blur mx-3 mx-md-4 mt-n6 mb-4">
+    <!-- START Testimonials w/ user image & text & info -->
+    <section class="py-sm-7 py-5 position-relative">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 mx-auto">
+            <div class="mt-n8 mt-md-n9 text-center">
+              <img class="avatar avatar-xxl shadow-xl position-relative z-index-2" src="{{ ASSETS_ROOT }}/img/logo-food-detail.png" alt="bruce" loading="lazy">
+            </div>
+            <div class="row py-5">
+              <div class="col-lg-7 col-md-7 z-index-2 position-relative px-md-2 px-sm-5 mx-auto">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <h3 class="mb-0">{{ cook.first_name }} {{ cook.last_name }}</h3>
+                  <div class="d-block">
+                    <button type="button" class="btn btn-sm btn-outline-info text-nowrap mb-0">
+                      <a href="{% url 'kitchen:cook-update' pk=cook.id %}">Edit</a>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-danger text-nowrap mb-0">
+                      <a href="{% url 'kitchen:cook-delete' pk=cook.id %}">Delete</a>
+                    </button>
+                  </div>
+                </div>
+                <div class="row mb-4">
+                  <div class="col-auto">
+                    <span class="h6">Username: </span>
+                    <span>{{ cook.username }}</span>
+                  </div>
+                  <div class="col-auto">
+                    <span class="h6">Years of experience: </span>
+                    <span>{{ cook.years_of_experience }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="py-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <h3 class="mb-5">Dishes prepared by the chef:</h3>
+          </div>
+        </div>
+        <div class="row">
+          <div class="card card-plain">
+            <ul>
+              {% for dish in cook.dishes.all %}
+                <li>
+                  <h5> 
+                    {{ dish.name }}
+                  </h5>
+                </li>
+                <p class="text-muted">
+                  Dish type: {{ dish.dish_type }}
+                </p>
+              {% empty %}
+                <p>No dishes!</p>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

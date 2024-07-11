@@ -1,0 +1,123 @@
+{#{% extends "base.html" %}#}
+{#{% load crispy_forms_filters %}#}
+{##}
+{#{% block content %}#}
+{#  <h1>#}
+{#    Prepare Dish#}
+{#    <a href="{% url 'kitchen:dish-create' %}" class="btn btn-primary link-to-page">#}
+{#      Create#}
+{#    </a>#}
+{#  </h1>#}
+{#  <form action="" method="get" class="form-inline">#}
+{#    {{ search_form|crispy }}#}
+{#    <input type="submit" value="🔎" class="btn btn-secondary">#}
+{#  </form>#}
+{#  {% if dish_list %}#}
+{#    <table class="table">#}
+{#      <tr>#}
+{#        <th>ID</th>#}
+{#        <th>Name</th>#}
+{#        <th>Dish Type</th>#}
+{#        <th>Description</th>#}
+{#      </tr>#}
+{##}
+{#      {% for dish in dish_list %}#}
+{#        <tr>#}
+{#          <td> {{ dish.id }}</td>#}
+{#          <td>#}
+{#            <a href="{{ dish.get_absolute_url }}">{{ dish.name }}</a>#}
+{#          </td>#}
+{#          <td>{{ dish.dish_type}}</td>#}
+{#          <td>{{ dish.description|truncatewords:5 }}</td>#}
+{#        </tr>#}
+{#      {% endfor %}#}
+{#    </table>#}
+{##}
+{#   {% else %}#}
+{#      <p>There are no dishes in restaurant kitchen!</p>#}
+{#  {% endif %}#}
+{#{% endblock %}#}
+
+{% extends "layouts/base.html" %}
+{% load crispy_forms_filters %}
+
+{% block title %} About Dish {% endblock %}
+
+{% block body_class %} about-us {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+  {% include 'includes/navigation-transparent.html' %}
+
+  <header class="bg-gradient-dark">
+    <div class="page-header min-vh-75" style="background-image: url('{{ ASSETS_ROOT }}/img/bg9.jpg');">
+      <span class="mask bg-gradient-dark opacity-6"></span>
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8 text-center mx-auto my-auto">
+            <h1 class="text-white">Let's consider a variety of dishes</h1>
+            <p class="lead mb-4 text-white opacity-8">We constantly try to express ourselves and realize the cooking of our favorite dishes</p>
+                <a href="{% url 'kitchen:dish-create' %}" class="btn bg-gradient-light w-auto me-2">
+                  Create new dish
+                </a>
+            <div class="d-flex justify-content-center">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="card card-body shadow-xl mx-3 mx-md-4 mt-n6">
+  <section class="pb-5 position-relative bg-gradient-dark mx-n3">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 text-start mb-5 mt-5">
+          <h3 class="text-white z-index-1 position-relative">You can choose from a list of dishes</h3>
+          <p class="text-white opacity-8 mb-0">Here you can select different dishes to see detailed information about them.</p>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row justify-space-between py-2">
+          <div class="col-lg-4 ">
+            <div class="input-group input-group-dynamic">
+              <form action="" method="get" class="form-inline" >
+                {{ search_form|crispy }}
+                <input type="submit" value="🔎" class="btn btn-outline-white">
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% if dish_list %}
+        <div class="row">
+          {% for dish in dish_list %}
+            <div class="col-lg-6 col-12">
+              <div class="card card-profile mt-4">
+                <div class="row">
+                  <div class="col-12 my-auto">
+                    <div class="card-body">
+                      <h5 class="mb-0">
+                        <a href="{{ dish.get_absolute_url }}">{{ dish.name }}</a>
+                      </h5>
+                      <h6 class="text-info">{{ dish.dish_type }}</h6>
+                      <p class="mb-0">{{ dish.description|truncatewords:20 }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p>There are no dishes in restaurant kitchen!</p>
+      {% endif %}
+    </div>
+  </section>
+  </div>
+
+{% endblock content %}
+  
